@@ -40,16 +40,30 @@ jobs:
         
       - name: Setup pnpm config
         run: pnpm config set store-dir "$PNPM_CACHE_FOLDER"
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
         # Makes sure the pnpm store path exists (which is exactly what setup-node cares about)
       - name: Verify PNPM Cache Directory
         run: |
-          PNPM_STORE_PATH="$( pnpm store path --silent )"
+          PNPM_STORE_PATH="${{ env.STORE_PATH }}"
           if [ ! -d "$PNPM_STORE_PATH" ]; then
             echo "PNPM store directory does not exist, creating it."
             mkdir -p "$PNPM_STORE_PATH"
           else
             echo "PNPM store directory exists."
           fi
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
     
       - name: Setup Node.js
         uses: actions/setup-node@v4
