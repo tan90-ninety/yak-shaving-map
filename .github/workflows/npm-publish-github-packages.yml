@@ -24,7 +24,7 @@ jobs:
   # 单次部署的工作描述
   deploy:
     environment:
-      name: gsap_cocktails
+      name: env
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
