@@ -1,4 +1,5 @@
 export default function UpdateTime() {
+    // Starting from July 29th, 2025
     return (<>
         <span style={{
             position: 'absolute',
