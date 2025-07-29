@@ -1,18 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
-import { Network, type Edge, type Node } from 'vis-network';
-import { data } from './data';
-
-const options = {};
+import { useEffect, useRef } from 'react'
+import { Network } from 'vis-network';
+import { data } from './data.ts';
+import { options } from './options.ts';
 function Timeline() {
     const timelineRef = useRef(null);
     useEffect(() => {
         if (timelineRef.current) {
-            const network = new Network(timelineRef.current, data, options);
+            new Network(timelineRef.current, data, options);
         }
     });
 
     return <div ref={timelineRef} style={{
-        width: '100vw', height: '100vh'
+        width: '100vw',
+        height: '100vh'
     }}></div >
 }
 
