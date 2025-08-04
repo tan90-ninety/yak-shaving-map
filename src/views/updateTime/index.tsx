@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react"
-import { pathPrefix } from "../../utils/config"
+import { pathPrefix } from "../../common/config.ts"
 
 export default function UpdateTime() {
-    const [lastUpdateTime, setLastUpdateTime] = useState<string>()
+    const [lastUpdateTime, setLastUpdateTime] = useState('')
     useEffect(() => {
         getLastCommitInfo()
     }, [])
 
+    const [isGitHub, setIsGitHub] = useState(false)
+
     async function getLastCommitInfo() {
         const res = await fetch(pathPrefix + '/commitInfo.json')
-        const data = await res.json()
-        setLastUpdateTime(data.commitDate)
+        if (res.headers.get('server') && res.headers.get('server') === 'GitHub.com') {
+            const data = await res.json()
+            setLastUpdateTime(data.commitDate)
+            setIsGitHub(true)
+        } else {
+            setIsGitHub(false)
+        }
     }
 
-    // Starting from July 29th, 2025
     return (<>
-        <span style={{
+        {isGitHub && (<span style={{
             position: 'absolute',
             right: '20px',
             bottom: '20px',
@@ -31,8 +37,8 @@ export default function UpdateTime() {
         }}>
             Last updated:
             <time dateTime={lastUpdateTime}>
-                {lastUpdateTime?.slice(0,-6)}
+                {lastUpdateTime.slice(0, -6)}
             </time>
-        </span>
+        </span>)}
     </>)
 }
