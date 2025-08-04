@@ -1,26 +1,20 @@
 import type { Edge, Node } from 'vis-network';
+import { tree2NodesAndEdges } from '../../common/utils.ts';
 
-const nodes: Node[] = [
-    { id: 1, label: "后端" },
-    { id: 2, label: "Node 2" },
-    { id: 3, label: "Node 3" },
-    { id: 4, label: "Node 4" },
-    { id: 5, label: "Node 5" },
-];
+const data = tree2NodesAndEdges([
+    {
+        id: "原点", label: "原点", children: [
+            {
+                id: "计算机四大件", label: "计算机四大件", children: [
+                    { id: "计网", label: "计网" }
+                ]
+            }
+        ]
+    }
+])
 
-// create an array with edges
-const edges: Edge[] = [
-    { from: 1, to: 3 },
-    { from: 1, to: 2 },
-    { from: 2, to: 4 },
-    { from: 2, to: 5 },
-    { from: 3, to: 3 },
-];
-
-const data = { nodes, edges };
-
+export const nodes: Node[] = data.nodes
+export const edges: Edge[] = data.edges
 export {
-    nodes,
-    edges,
     data
 }
