@@ -11,7 +11,7 @@ export default function UpdateTime() {
         const res = await fetch(pathPrefix + '/commitInfo.json')
         const data = await res.json()
         console.log(data);
-        setLastUpdateTime(data.lastCommitTime)
+        setLastUpdateTime(data.commitDate)
     }
 
     // Starting from July 29th, 2025
