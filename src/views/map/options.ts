@@ -5,10 +5,10 @@ const options: Options = {
         arrows: {
             to: {
                 enabled: true,
-                imageHeight: undefined,
-                imageWidth: undefined,
+                // imageHeight: undefined,
+                // imageWidth: undefined,
                 scaleFactor: 1,
-                src: undefined,
+                // src: undefined,
                 type: "arrow"
             }
         },
