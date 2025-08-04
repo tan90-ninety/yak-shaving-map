@@ -1,7 +1,7 @@
 import type { Edge, Node } from 'vis-network';
 
 const nodes: Node[] = [
-    { id: 1, label: "root" },
+    { id: 1, label: "后端" },
     { id: 2, label: "Node 2" },
     { id: 3, label: "Node 3" },
     { id: 4, label: "Node 4" },
@@ -17,7 +17,10 @@ const edges: Edge[] = [
     { from: 3, to: 3 },
 ];
 
-export const data = {
+const data = { nodes, edges };
+
+export {
     nodes,
-    edges
+    edges,
+    data
 }

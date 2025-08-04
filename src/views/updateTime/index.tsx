@@ -1,4 +1,19 @@
+import { useEffect, useState } from "react"
+import { pathPrefix } from "../../utils/config"
+
 export default function UpdateTime() {
+    const [lastUpdateTime, setLastUpdateTime] = useState()
+    useEffect(() => {
+        getLastCommitInfo()
+    }, [])
+
+    async function getLastCommitInfo() {
+        const res = await fetch(pathPrefix + '/commitInfo.json')
+        const data = await res.json()
+        console.log(data);
+        setLastUpdateTime(data.lastCommitTime)
+    }
+
     // Starting from July 29th, 2025
     return (<>
         <span style={{
@@ -17,7 +32,7 @@ export default function UpdateTime() {
         }}>
             Last updated:
             <time dateTime="2025-07-29T21:42:16.000Z">
-                2025/07/29 21:42
+                {lastUpdateTime}
             </time>
         </span>
     </>)
