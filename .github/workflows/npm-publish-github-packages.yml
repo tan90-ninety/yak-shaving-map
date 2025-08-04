@@ -63,7 +63,7 @@ jobs:
         # 使用 shell 脚本获取 Git 信息并更新 build-info.json
         run: |
           COMMIT_DATE=$(git show -s --format=%ci HEAD)
-          echo '{"commitDate": "$COMMIT_DATE"}'' >> ./dist/commitInfo.json
+          echo '{"commitDate": "$COMMIT_DATE"}' >> ./dist/commitInfo.json
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
