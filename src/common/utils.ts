@@ -1,8 +1,10 @@
 import type { Edge, Node } from 'vis-network';
 
 type meta = {
-    date?: string;
-    type?: string;
+    startDate?: string;
+    endDate?: string;
+    type?: 'video';
+    status?: 'pending' | 'fulfilled' | 'rejected';
 }
 
 type tree2NodesAndEdgesData = Node & { meta?: meta; children?: tree2NodesAndEdgesData[] };
